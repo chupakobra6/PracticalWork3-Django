@@ -1,0 +1,31 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{% url 'product_list' %}">Каталог</a>
+
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'product_list' %}">Товары</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'order_list' %}">Заказы</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'product_create' %}">Добавить товар</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'category_create' %}">Добавить категорию</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'tag_create' %}">Добавить тег</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'feedback' %}">Отзыв</a>
+                </li>
+            </ul>
+            <form role="search">
+                <input class="form-control" type="search" placeholder="Поиск (на ремонте)">
+            </form>
+        </div>
+    </div>
+</nav>

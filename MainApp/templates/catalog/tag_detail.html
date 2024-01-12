@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Тег: {{ tag.name }}{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1 class="tag-h1">Просмотр тега:</h1>
+    <div class="tag-div">
+        <h2>{{ tag.name }}</h2>
+        <p><strong>Описание:</strong><br>{{ tag.description|linebreaksbr }}</p>
+        <a class="product-tag" href="{% url 'product_list_by_tag' tag_id=tag.id %}">Просмотр товаров с этим тегом</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Страница API{% endblock %}
+
+{% block nav %}{% include 'api/api_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1>Страница API</h1>
+    <ul>
+        <li><a href="{% url 'category-list' %}">Категории</a></li>
+        <li><a href="{% url 'tag-list' %}">Теги</a></li>
+        <li><a href="{% url 'product-list' %}">Продукты</a></li>
+        <li><a href="{% url 'order-list' %}">Заказы</a></li>
+        <li><a href="{% url 'orderitem-list' %}">Позиции заказов</a></li>
+    </ul>
+{% endblock %}

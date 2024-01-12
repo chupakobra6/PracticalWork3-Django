@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог товаров{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1>Каталог товаров</h1>
+    <ul>
+        <li><a href="{% url 'product_create' %}">Добавить товар</a></li>
+        <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+    </ul>
+    <a class="product-a" href="{% url 'categories_list' %}"><h2>Категории</h2></a>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'product_list_by_category' category_id=category.id %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>Товары</h2>
+    <ul class="product-ul">
+        {% for product in products %}
+            <li class="product-li">
+                <a class="product-a" href="{% url 'product_detail' product.id %}">
+                    <strong>{{ product.name }}</strong> - Цена: <span class="price">{{ product.price }} руб.</span>
+                    <br>
+                    Описание: {{ product.description|linebreaksbr }}
+                    <br>
+                    <em>Категория:</em>
+                    <object>
+                        <a class="product-category"
+                           href="{% url 'product_list_by_category' category_id=product.category_id %}">{{ product.category.name }}</a>
+                    </object>
+                    <br>
+                    <em>Теги:</em>
+                    {% for tag in product.tags.all %}
+                        <object>
+                            <a class="product-tag"
+                               href="{% url 'product_list_by_tag' tag_id=tag.id %}">{{ tag.name }}</a>
+                        </object>
+                    {% endfor %}
+                    <br>
+                    {% if product.image %}
+                        <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+                    {% endif %}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% include 'include/_pagination.html' %}
+    <a class="product-a" href="{% url 'tags_list' %}"><h2>Теги</h2></a>
+    {% for tag in tags %}
+        <a class="product-tag" href="{% url 'product_list_by_tag' tag_id=tag.id %}">{{ tag.name }}</a>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Все категории{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1>Все категории</h1>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'category_detail' pk=category.pk %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    {% include 'include/_pagination.html' %}
+{% endblock %}

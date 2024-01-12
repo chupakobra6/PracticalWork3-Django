@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Удаление заказа{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+  <h1>Удаление заказа</h1>
+  <p>Вы уверены, что хотите удалить заказ "{{ object }}"?</p>
+  <form method="post" class="form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-danger">Подтвердить удаление</button>
+    <a href="{% url 'order_list' %}" class="btn btn-secondary">Отмена</a>
+  </form>
+{% endblock %}

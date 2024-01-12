@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Товар: {{ product.name }}{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1 class="product-h1">Просмотр товара</h1>
+    <div class="product-div">
+        <h1>{{ product.name }}</h1>
+        <img class="view_product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+        <p><strong>Цена: </strong><span class="price">{{ product.price }} руб.</span></p>
+        <p><strong>Описание:</strong><br>{{ product.description|linebreaksbr }}</p>
+        <p><em>Категория: </em><a class="product-category"
+                                  href="{% url 'product_list_by_category' category_id=product.category_id %}">{{ product.category.name }}</a>
+        </p>
+        <p><em>Теги: </em>
+            {% for tag in product.tags.all %}
+                <a class="product-tag" href="{% url 'product_list_by_tag' tag_id=tag.id %}">{{ tag.name }}</a>
+            {% endfor %}
+        </p>
+
+        <a class="product-important-a" href="{% url 'product_update' pk=product.pk %}">Изменить
+            товар</a>
+        <a class="product-important-a" href="{% url 'product_delete' pk=product.pk %}">Удалить
+            товар</a>
+    </div>
+{% endblock %}

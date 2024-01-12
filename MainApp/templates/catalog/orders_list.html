@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Каталог заказов{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1>Каталог заказов</h1>
+    <ul>
+        <li><a href="{% url 'product_create' %}">Добавить товар</a></li>
+        <li><a href="{% url 'feedback' %}">Обратная связь</a></li>
+    </ul>
+    <a class="product-a" href="{% url 'categories_list' %}"><h2>Категории</h2></a>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'product_list_by_category' category_id=category.id %}">{{ category.name }}</a></li>
+        {% endfor %}
+    </ul>
+    <h2>Заказы</h2>
+    <ul class="product-ul">
+        {% for order in orders %}
+            <li class="product-li">
+                <a class="product-a" href="{% url 'order_detail' pk=order.order_number %}">
+                    <strong>Номер заказа:</strong> {{ order.order_number }}<br>
+                    <strong>Дата создания:</strong> {{ order.order_date }}<br>
+                    <strong>Адрес доставки:</strong> {{ order.delivery_address }}<br>
+                    <strong>Телефон клиента:</strong> {{ order.customer_phone }}<br>
+                    <strong>ФИО клиента:</strong> {{ order.customer_name }}<br>
+                    <strong>Товары:</strong>
+                    <ul>
+                        {% for item in order.orderitem_set.all %}
+                            <li>
+                                <a class="product-important-a"
+                                   href="{% url 'product_detail' pk=item.id %}">{{ item.product.name }}<a/> -
+                                    Количество: {{ item.quantity }} -
+                                    Цена: {{ item.product.price }}
+                                    руб.
+                                    {% if item.discount_per_unit %}
+                                        - Скидка: {{ item.discount_per_unit }} руб.
+                                    {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+    {% include 'include/_pagination.html' %}
+{% endblock %}

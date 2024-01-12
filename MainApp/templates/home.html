@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}Домашняя страница{% endblock %}
+
+{% block content %}
+    <h1>Домашняя страница</h1>
+    <ul>
+        <li><a href="{% url 'product_list' %}">Каталог товаров</a></li>
+        <li><a href="{% url 'cart' %}">Корзина</a></li>
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'user_profile' %}">Личный кабинет</a></li>
+            <li><a href="{% url 'api' %}">API</a></li>
+            <li><a href="{% url 'logout' %}">Выйти</a></li>
+        {% else %}
+            <li><a href="{% url 'login' %}">Войти</a></li>
+            <li><a href="{% url 'register' %}">Зарегистрироваться</a></li>
+        {% endif %}
+    </ul>
+{% endblock %}

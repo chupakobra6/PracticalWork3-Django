@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Добавление товара{% endblock %}
+
+{% block nav %}{% include 'catalog/catalog_nav.html' %}{% endblock %}
+
+{% block content %}
+    <h1>Добавление товара</h1>
+    <form method="post" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Добавить товар</button>
+    </form>
+{% endblock %}

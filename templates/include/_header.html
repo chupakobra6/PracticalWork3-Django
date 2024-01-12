@@ -1,0 +1,15 @@
+<header class="d-flex justify-content-center py-3">
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="{% url 'home' %}" class="nav-link active" aria-current="page">Главная</a></li>
+        <li class="nav-item"><a href="{% url 'product_list' %}" class="nav-link">Каталог</a></li>
+        <li class="nav-item"><a href="{% url 'cart' %}" class="nav-link">Корзина</a></li>
+        {% if user.is_authenticated %}
+            <li class="nav-item"><a href="{% url 'api' %}" class="nav-link">API</a></li>
+            <li class="nav-item"><a href="{% url 'user_profile' %}" class="nav-link">Личный кабинет</a></li>
+            <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Выйти</a></li>
+        {% else %}
+            <li class="nav-item"><a href="{% url 'login' %}" class="nav-link">Войти</a></li>
+            <li class="nav-item"><a href="{% url 'register' %}" class="nav-link">Зарегистрироваться</a></li>
+        {% endif %}
+    </ul>
+</header>
